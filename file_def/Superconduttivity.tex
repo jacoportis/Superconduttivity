@@ -1,0 +1,124 @@
+\documentclass[11pt, twoside]{book}
+%%%% Preambolo
+\usepackage{file_ausiliari/pacchetti}
+\usepackage{file_ausiliari/comandi}
+\usepackage{file_ausiliari/Definizioni}
+\usepackage{file_ausiliari/ambienti}
+\usepackage{file_ausiliari/impaginazione}
+\usepackage{file_ausiliari/referencing}
+\usepackage{file_ausiliari/custom}
+%\usepackage{file_ausiliari/TikZ}
+
+%\setcounter{chapter}{-1} %Permette di numerare l'introduzione come capitolo 0
+
+\begin{document}
+\frontmatter
+%%%%%%%           Titolo
+\input{file_ausiliari/titolo.tex}
+%\thispagestyle{empty}
+%%%%%%%           Indice
+%% Toglie numero pagina al centro nelle pagine dispari di titolo, sia nel toc che in biblio e nell'indice analitico
+\makeatletter
+\let\ps@plain\ps@fancytitle\makeatother
+
+\newgeometry{
+    top=2.3cm,bottom=2.3cm,
+    %% Margini
+    left = 2.3cm,
+    right=5.2cm,
+    marginparsep=0cm,
+    marginparwidth=4.3cm,
+    %%% Contenuto
+    %textwidth=14cm,
+    %textheight=180mm,
+    %headheight=21pt,
+    %%%%%%5 Header e footer
+    %headsep=10pt,
+    %footskip=20pt,
+    %footnotesep=10pt,
+}
+\tableofcontents
+\restoregeometry
+%\cleardoublepage
+
+
+
+
+\mainmatter\thispagestyle{fancytitle}
+\phantomsection
+%\chapter*{Prefazione}
+%\addcontentsline{toc}{chapter}{Prefazione}
+% \clearpage
+
+\thispagestyle{empty}
+
+%\chapter{Introduzione}
+%\input{Capitoli/0.Introduzione.tex}
+
+\chapter{Effetti caratteristici e teorie fenomenologiche}
+\input{Capitoli/1.Effetti_caratteristici_e_teorie_fenomenologiche.tex}
+
+\chapter{Teoria microscopica}
+\input{Capitoli/2.Teoria_microscopica.tex}
+
+\chapter{Dispositivi superconduttivi}
+\input{Capitoli/3.Dispositivi_superconduttivi.tex}
+
+% \chapter*{Appendice A}
+% \addcontentsline{toc}{chapter}{Appendice A}
+% \input{appendici/AppendiceA}
+
+% Bibliografia
+% \makeatletter
+% \let\ps@plain\ps@fancytitle\makeatother
+\cleardoublepage\phantomsection
+\backmatter\printbibheading[heading=bibintoc]
+%\vspace{5mm}
+
+
+\printbibliography[type=book,heading=subbibliography,title={Libri di testo}]
+
+\selectlanguage{english}
+\printbibliography[nottype=book,heading=subbibliography,title={Altri riferimenti}]
+
+
+
+%\newgeometry{margin=0.5in}
+
+
+% Indice analitico
+%\addcontentsline{toc}{part}{}{}   %%% Fix al link all'indice analitico. Funziona solo se titleformat part è vuoto.
+% \fancyhead[RO]{\makebox[0pt][l]{\makebox[\myoddoffset][r]{\thepage}}}
+% \fancyhead[LE]{\makebox[0pt][r]{\makebox[\myoddoffset][l]{\thepage}}}
+% \newgeometry{
+%   left = 2.3cm,
+%   right=1cm,
+%   marginparsep=0cm,
+%   marginparwidth=0cm,
+%   top=2.3cm,bottom=2.3cm,
+% }
+\newgeometry{
+    top=2.3cm,bottom=2.3cm,
+    %% Margini
+    left = 2.3cm,
+    right=3.2cm,
+    marginparsep=0cm,
+    marginparwidth=2.3cm,
+    %%% Contenuto
+    %textwidth=14cm,
+    %textheight=180mm,
+    %headheight=21pt,
+    %%%%%%5 Header e footer
+    %headsep=10pt,
+    %footskip=20pt,
+    %footnotesep=10pt,
+}
+\scriptsize
+\renewcommand{\indexname}{Indice analitico}
+% CHANGE PLAIN STYLE
+% \makeatletter
+% \let\ps@plain\ps@fancytitle\makeatother
+%\thispagestyle{fancytitle}
+\cleardoublepage\phantomsection
+\printindex
+\end{document}

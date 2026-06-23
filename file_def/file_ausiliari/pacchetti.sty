@@ -1,0 +1,121 @@
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lipsum}
+%\usepackage{soul}	
+% Impaginazione
+\usepackage[explicit]{titlesec}
+\usepackage{
+    geometry,
+    fancyhdr,
+    float,
+    setspace,
+    titletoc,
+}
+\usepackage{anyfontsize}
+\usepackage{t1enc}
+\usepackage{calc} % fixa il comando \setlength
+\usepackage{scrextend} % Per le condizioni page odd e page even
+\usepackage{marginfix}
+\usepackage[small,labelfont=bf,up,textfont=it,up,hypcap=true]{caption} % didascalie
+%% Mette in grassetto la parola Figura e il numero della figura
+\addto\captionsitalian{\renewcommand{\figurename}{\textbf{Figura}}}
+
+\def\fnum@figure{\figurename\nobreakspace\textbf{\thefigure}}
+
+% Definizione di un nuovo formato per tutte le didascalie
+\DeclareCaptionFormat{boldcaption}{\textbf{#1 #2} #3}
+\captionsetup{format=boldcaption}
+
+% Ambienti personalizzati
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage[skins, breakable, many]{tcolorbox}
+\usepackage{adjustbox}
+% Note a margine
+\usepackage{
+    marginnote,
+    sidenotes,
+}
+\usepackage{mparhack}
+% Matematica e fisica
+\usepackage[shortlabels]{enumitem}
+\usepackage{
+    amsmath,		% Typesetting in ambiente matematico
+    amssymb,		% Simboli in ambiente matematico
+    amsthm,			% Typesetting teoremi
+    bm,
+    mathrsfs,		% Caratteri in ambiente matematico (e.g. \mathscr)
+    nicefrac,		% Miglioramento aspetto frazioni
+    physics,		% Notazione di Dirac, derivate, ecc.
+    tikz,
+    wrapfig,		% Gestione di figure flottanti
+    dsfont,
+    tensor,         % Notazione tensoriale
+}
+% Appendici e indice analitico
+\usepackage{
+    makeidx,		% Creazione dell'indice analitico
+    imakeidx,       % Scrittura sull'indice analitico
+}
+\usepackage{slashed} %Per il simbolo di Feynman
+\newcommand\fy[1][\partial]{\slashed{#1}}
+
+\usepackage[toc,page]{appendix}
+\indexsetup{othercode=\small}
+\makeindex[program=makeindex, columns=3, intoc=false]
+
+
+%Tabelle
+\usepackage{multirow}
+\usepackage{tabularray}
+
+% Pacchetti bibliografia
+\usepackage[nottoc,notlot,notlof]{tocbibind} % Aggiunge la bibliografia nell'indice
+\usepackage[
+    citestyle=alphabetic-verb,
+    bibstyle=alphabetic,
+    labeldateparts,
+    backend=biber,
+    citetracker=strict,
+    sorting=none,
+]{biblatex}
+\usepackage{csquotes}
+\addbibresource{file_ausiliari/bibliografia.bib}
+
+%%% Miglior referencing
+\pagenumbering{none}
+
+
+%\makeindex[columns=3, title=Indice analitico]
+
+% Usato per \newcommandx; permette la gestione di argomenti opzionali
+\usepackage{xargs}
+% Varie
+\usepackage[titles]{tocloft}
+\usepackage{mathtools}
+\usepackage[psdextra,
+            colorlinks=true,
+            allcolors=black,
+            linktoc=all,
+            %implicit=false,
+            %bookmarks=false,
+            backref=true,
+            hypertexnames=true,
+            ]{hyperref}
+\hypersetup{pdfencoding=auto}
+\usepackage{bookmark}
+\usepackage{dirtytalk}
+\usepackage{ragged2e}
+
+\usetikzlibrary{patterns,plotmarks,snakes,3d}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\pgfplotsset{
+    % Define custom styles for different line types
+    dasheddotted/.style={
+        dash pattern=on 4pt off 2pt on 1pt off 2pt
+    },
+}
+
+\usepackage{stmaryrd}

@@ -1,0 +1,237 @@
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\emergencystretch=1em % fixa alcuni warning overfull hbox
+\geometry{
+    %showframe,           % Mostra i bordi della pagina
+    a4paper,             % Formato A4
+    top=2.3cm,bottom=2.3cm,
+    %% Margini
+    left = 2.3cm,
+    right=6.7cm,
+    marginparsep=0.5cm,
+    marginparwidth=5.3cm,
+    %%% Contenuto
+    %textwidth=14cm,
+    %textheight=180mm,
+    %headheight=21pt,
+    %%%%%%5 Header e footer
+    %headsep=10pt,
+    %footskip=20pt,
+    %footnotesep=10pt,
+}
+%% Fixa warning di fancyhdr, a cui non piace la headheight di 12pt
+\setlength{\headheight}{13.6pt}
+\addtolength{\topmargin}{-1.6pt}   %% -1.6pt = 12pt - 13.6pt
+
+%% TOC
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+
+
+
+%%%%% Fancy part di Oxford convertito in fancy chapter %%%%%%
+\newlength{\myoddoffset}%
+\setlength{\myoddoffset}{\marginparwidth + \marginparsep}%
+
+
+\pagestyle{fancy}%
+
+%%% Header
+\fancyhf{}
+\fancyhead[LO]{\nouppercase\rightmark}
+\fancyhead[RO]{\makebox[0pt][l]{\makebox[\myoddoffset][r]{\hyperlink{tocsection.\thesection}\thepage}}}
+\fancyhead[LE]{\makebox[0pt][r]{\makebox[\myoddoffset][l]{\hyperlink{tocsection.\thesection}\thepage}}}
+\fancyhead[RE]{\nouppercase\leftmark}
+
+
+% \renewcommand{\headrulewidth}{0.25pt}
+% \fancyhead[LE, RO]{\small\parbox{.45\textwidth}{\centering \bfseries\nouppercase{\leftmark}}}
+% \fancyhead[LO, RE]{\small\parbox{.45\textwidth}{\centering\nouppercase{\rightmark}}}
+%\fancyfoot[LE,RO]{\small\thepage}
+
+% \fancyfoot[C]{}
+% \fancyfoot[LE,RO]{\small danielediprima17@gmail.com}
+
+\fancyfoot[RO]{\makebox[0pt][l]{\parbox[r]{\myoddoffset}{\raggedleft\footnotesize}}}
+
+\fancyfoot[LE]{\makebox[0pt][r]{\parbox[r]{\myoddoffset}{\raggedright\footnotesize}}}
+
+% \fancyfoot[LE]{\makebox[0pt][r]{\makebox[\myoddoffset][l]{\small danielediprima17@gmail.com}}}
+%%% fixa la sovrapposizione dei titoli nell'header
+%\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+%\renewcommand{\subsectionmark}[1]{\markright{#1}{}}
+
+%% Fixa i numeri di pagina agli estremi
+%\fancyfoot{}
+%\fancyheadoffset[LE,RO]{\myoddoffset}%
+%\fancyheadoffset[lh]{\myoddoffset}%
+%\fancyhead[LE,RO]{\thepage}%
+
+%%% No linea nell'header
+%\renewcommand{\headrulewidth}{1pt}
+
+\fancypagestyle{fancynotes}{%
+  \fancyhf{}%
+  \fancyheadoffset[rh]{\myoddoffset}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyhead[L]{\textsc{\leftmark}}%
+  \fancyhead[R]{\footnotesize \textit{\rightmark}~~~~ \thepage}%
+}%
+
+% \fancypagestyle{fancychapter}{%
+%   \fancyhf{}%
+%   %\fancyfootoffset[rh]{\myoddoffset}%
+%   %\fancyfootoffset[lh]{\myoddoffset}%
+%   \renewcommand{\headrulewidth}{0pt}
+%   %\fancyfoot[LE,RO]{\thepage}%
+% }%
+
+\fancypagestyle{fancytitle}{%
+  \fancyhf{}%
+  %\fancyfootoffset[rh]{\myoddoffset}%
+  %\fancyfootoffset[lh]{\myoddoffset}%
+  \renewcommand{\headrulewidth}{0pt}
+  %\fancyfoot[LE,RO]{\thepage}%
+  % \fancyfoot[RO]{\makebox[0pt][l]{\makebox[\myoddoffset][r]{\small danielediprima17@gmail.com}}}
+  % \fancyfoot[LE]{\makebox[0pt][r]{\makebox[\myoddoffset][l]{\small danielediprima17@gmail.com}}}
+  \fancyfoot[RO]{\makebox[0pt][l]{\parbox[r]{\myoddoffset}{\raggedleft\scriptsize}}}
+
+  \fancyfoot[LE]{\makebox[0pt][r]{\parbox[r]{\myoddoffset}{\raggedright\scriptsize}}}
+}%
+
+
+\fancypagestyle{fancypart}{%
+  \fancyhf{}%
+  \newgeometry{
+    left = 4.5cm,
+    right=4.5cm,
+    marginparsep=0cm,
+    marginparwidth=0cm,
+  }
+  %\fancyfootoffset[rh]{\myoddoffset}%
+  \renewcommand{\headrulewidth}{0pt}%
+}%
+
+
+%% Cliccando sul titolo fa tornare al TOC
+% renew \contentsline for toc to include hypertarget
+\let\oldcontentsline\contentsline%
+\renewcommand\contentsline[4]{%
+\hypertarget{toc#4}{}%
+\oldcontentsline{#1}{#2}{#3}{#4}}
+
+%% Pagina part
+\titleformat{\part}[block]
+{\thispagestyle{fancypart}\Huge\filcenter\bfseries}
+{\centering\scshape{Parte}\hspace{0.5em}\thepart}{0pt}
+{\normalfont\Huge\bfseries\\\hyperlink{tocchapter.\thechapter}{#1}}
+
+%%%%%% Box grande all'inizio del capitolo, con mini TOC
+\titleformat{\chapter}{{\thispagestyle{fancytitle}}\Huge\bfseries\raggedright}{\marginnote{
+\begin{tcolorbox}[width=\marginparwidth,height=\marginparwidth/2,colback=white!75!black,colframe=white!75!black,center title,fonttitle=\large,title={\color{black}\bfseries\scshape{Capitolo}},text fill]
+  \begin{center}
+  {\color{black}\fontsize{50}{60}\selectfont \thechapter}
+  \end{center}
+\end{tcolorbox}
+%% minitoc
+\raggedright\hyphenpenalty=10000
+\normalfont\scriptsize
+\startcontents
+\printcontents{l}{1}[1]{}
+}[-1.25in]}{0pt}{\rmfamily\Huge\bfseries\hyperlink{tocchapter.\thechapter}{#1}}
+
+% renew \section to link to the toc
+\titleformat{name=\chapter,numberless}
+{\rmfamily\Huge\bfseries}
+{}
+{0pt}
+{\hyperlink{tocchapter.\thechapter}{#1}}
+
+\titleformat{\section}
+{\normalfont\Large\bf}
+{}
+{0pt}
+{{\thesection} \hyperlink{tocsection.\thesection}{#1}}
+
+\titleformat{name=\section,numberless}
+{\normalfont\Large\bf}
+{}
+{0pt}
+{\hyperlink{tocsection.\thesection}{#1}}
+
+% renew \subsection to link to the toc
+\titleformat{\subsection}
+{\normalfont\large\bf}
+{}
+{0pt}
+{{\thesubsection} \hyperlink{tocsubsection.\thesubsection}{#1}}
+
+\titleformat{name=\subsection,numberless}
+{\normalfont\large\bf}
+{}
+{0pt}
+{#1}
+% \setcounter{tocdepth}{1}
+
+%%%%%%%% TOC personalizzato %%%%%%%
+\makeatletter
+\renewcommand \dotfill {\leavevmode \cleaders \hb@xt@ .80em{\hss .\hss }\hfill \kern \z@}
+\makeatother
+
+\titlecontents{part}
+[0.0cm]             % left margin
+{\centering\vspace{.5cm}}                  % above code
+{%                  % numbered format
+{%\centering\scshape{Parte}\space\thecontentslabel.\space
+}%
+}%
+{%  unnumbered format. Per qualche motivo, la numered part è in realtà unnumbered
+\bfseries\scshape{Parte}\normalfont\bfseries\space\thecontentslabel\space
+%\centering\scshape{Parte}\space\thecontentslabel.\space
+}
+{%\dotfill\bfseries\contentspage
+}         % filler-page-format, e.g dots
+
+% indented subsection (in toc)
+\titlecontents{chapter}
+[0.0cm]             % left margin
+{\bfseries\vspace{0.5cm}}                  % above code
+{%                  % numbered format
+{\bfseries\scshape{Capitolo}\space\thecontentslabel\hspace{10pt}}%
+}%
+{\bfseries}         % unnumbered format
+{%\dotfill\bfseries
+\hfill\contentspage
+}         % filler-page-format, e.g dots
+
+\titlecontents{section}
+[0.0cm]             % left margin
+{}                  % above code
+{%                  % numbered format
+{\thecontentslabel\space\space}%
+}%
+{}         % unnumbered format
+{\dotfill\contentspage}         % filler-page-format, e.g dots
+
+\titlecontents{subsection}
+[27pt]             % left margin
+{}                  % above code
+{%                  % numbered format
+{\thecontentslabel\space\space}%
+}%
+{}         % unnumbered format
+{\dotfill\contentspage}         % filler-page-format, e.g dots
+
+
+
+
+%%%% Rendere invisibile \part serve a fixare il link all'indice analitico nel TOC
+% \titlecontents{part}
+% [0cm]             % left margin
+% {}                  % above code
+% {%                  % numbered format
+% {\thecontentslabel}
+% }%
+% {}         % unnumbered format
+% {}         % filler-page-format, e.g dots

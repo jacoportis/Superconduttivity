@@ -1,0 +1,144 @@
+
+    
+% Font per la prima pagina
+\newcommand{\thesisfont}[1]{\bfseries {#1}}
+\renewcommand*{\thefootnote}{(\arabic{footnote})}
+
+%Lettere
+\newcommand{\A}{\text{Å} \hspace{0.1mm}}
+\newcommand{\E}{È \hspace{0.1mm}}
+\makeatletter
+\newcommand{\lambdabar}{{\mathchoice
+  {\smash@bar\textfont\displaystyle{0.25}{1.2}\lambda}
+  {\smash@bar\textfont\textstyle{0.25}{1.2}\lambda}
+  {\smash@bar\scriptfont\scriptstyle{0.25}{1.2}\lambda}
+  {\smash@bar\scriptscriptfont\scriptscriptstyle{0.25}{1.2}\lambda}
+}}
+\newcommand{\smash@bar}[4]{%
+  \smash{\rlap{\raisebox{-#3\fontdimen5#10}{$\m@th#2\mkern#4mu\mathchar'26$}}}%
+}
+
+%%%%%%% Matematica e fisica %%%%%%%%%%%%%%
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\1}{\mathds{1}}
+\newcommand{\Lg}{\text{L}}
+\newcommand{\dLg}{\mathcal{L}}
+\newcommand{\Hm}{\mathcal{H}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\defeq}{\stackrel{\text{def}}{=}}
+\newcommand{\sch}{Schrödinger }
+\newcommand{\Par}{\mathbb{P}}
+\newcommand{\de}{\partial}
+\newcommand{\ffrac}[2]{\ensuremath{\frac{\displaystyle #1}{\displaystyle #2}}}
+% O piccolo di infinitesimo
+\newcommand\smallO{
+  \mathchoice
+    {{\scriptstyle\mathcal{O}}}% \displaystyle
+    {{\scriptstyle\mathcal{O}}}% \textstyle
+    {{\scriptscriptstyle\mathcal{O}}}% \scriptstyle
+    {\scalebox{.7}{$\scriptscriptstyle\mathcal{O}$}}%\scriptscriptstyle
+  }
+  
+
+% Indici di un tensore spaziati orizzontalmente
+\newcommand{\ind}[1]{\indices{#1}}
+
+%%%%%%%%%%% Riferimenti a equazione, a paragrafo ecc.. %%%%%%%%%%%%
+% Riferimento a equazione
+\newcommand{\eqrefcustom}[1]{\hypersetup{
+    linkcolor=linkequation,
+    linkbordercolor=linkequation,
+  }Eq.\eqref{#1}}
+
+% Riferimento a paragrafo
+\newcommand{\parrefcustom}[1]{\S \ref{#1}}
+
+%Riferimento a immagine
+\newcommand{\figrefcustom}[1]{Fig.\ref{#1}}
+
+% Riferimento a teorema
+\newcommand{\teorefcustom}[1]{Teo.\ref{#1}}
+
+% Riferimento a proposizione
+\newcommand{\proprefcustom}[1]{Prop.\ref{#1}}
+
+% Riferimento a esempio
+\newcommand{\esrefcustom}[1]{Es.\ref{#1}}
+
+% Riferimento a capitolo
+\newcommand{\caprefcustom}[1]{Cap.\ref{#1}}
+
+%Richiamare equazioni con lo stesso numero e stampandole pagine e pagine dopo
+\newcommand\labelAndRemember[2]
+  {\expandafter\gdef\csname labeled:#1\endcsname{#2}%
+   \label{#1}#2}
+\newcommand\recallLabel[1]
+   {\csname labeled:#1\endcsname\tag{\ref{#1}}}
+
+
+
+%%%%%%%%% Note a margine %%%%%%%%%%%%
+%%%%%%%%% SI NOTI LA DIFFERENZA TRA \newcommand E \newcommandx %%%%%%%%%%%%
+
+%%%% Questi due istruzioni di Oxford sembrano shiftare le \marginnote a sinistra... pero' servono a lasciare tutte le altre note a sinistra, quindi le lasciamo
+\renewcommand*{\raggedleftmarginnote}{\noindent}
+\renewcommand*{\raggedrightmarginnote}{\noindent}
+
+%% Mette le parentesi intorno al numero della nota a margine
+\renewcommand{\thesidenote}{(\arabic{sidenote})}
+
+\newcommand{\marginnoteleft}[1]{\marginnote{\raggedleft~#1}}
+
+%%%%%%%%% SI NOTI LA DIFFERENZA TRA \newcommand E \newcommandx %%%%%%%%%%%%
+%% \newcommandx è de pacchetto xargs, e permette argomenti opzionali %%
+\newcommandx{\margintitle}[2][2=0pt]{\Ifthispageodd{\marginnote{#1}[#2]}{\marginnote{\raggedleft~#1}[#2]}}
+
+%% Nota a margine numerata
+%%%%%%%%% SI NOTI LA DIFFERENZA TRA \newcommand E \newcommandx %%%%%%%%%%%%
+\newcommandx{\mn}[2][2=0pt]{\textsuperscript{\thesidenote}{}\marginnote{\textsuperscript{\thesidenote}{}~\footnotesize~#1}[#2]\refstepcounter{sidenote}}
+
+%% Nota a margine non numerata
+\newcommandx{\en}[2][2=0pt]{\marginnote{\footnotesize #1}[#2]}
+
+%% Da usare quando le \mn si sovrappono tra loro o si devono mettere consecutivamente; non funziona dentro equazioni e ambienti
+\newcommand{\sn}[1]{\sidenote{\footnotesize #1}}
+
+% %% Da usare quando il titolo a margine si trova a sinistra 
+% \newcommand{\marginnoteleft}[1]{\marginnote{\raggedleft#1}}
+
+% Da usare quando la nota a margine va fuori pagina
+\newcommandx{\mnpar}[2][2=0pt]{\textsuperscript{\thesidenote}{}\marginpar{\vspace{#2}\textsuperscript{\thesidenote}{}~\footnotesize #1}\refstepcounter{sidenote}}
+
+\newcommandx{\enpar}[2][2=0pt]{\marginpar{\vspace{#2}\footnotesize #1}}
+
+
+
+%% Riferimento a equazione con \mn{} che la richiama a margine
+\newcommandx{\eqrefmn}[2][2=0pt]{\eqrefcustom{#1}\mn{
+  \begin{equation*}
+    \recallLabel{#1}
+  \end{equation*}}[#2]
+}
+\newcommandx{\eqrefmnpar}[2][2=0pt]{\eqrefcustom{#1}\mnpar{
+  \begin{equation*}
+    \recallLabel{#1}
+  \end{equation*}}[#2]
+}
+%% Idem ma con \sn
+\newcommand{\eqrefsn}[1]{\eqrefcustom{#1}\sn{\tiny
+  \begin{equation*}
+    \recallLabel{#1}
+  \end{equation*}}
+}
+
+
+
+\let\oldchapter\chapter
+\def\chapter{%
+  \setcounter{sidenote}{1}%
+  \oldchapter
+}
